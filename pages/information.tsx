@@ -1,5 +1,5 @@
 import { useQuery, gql } from "@apollo/client";
-import { Box, Grid, Text, useDisclosure, Skeleton } from "@chakra-ui/react";
+import { useDisclosure } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { Header, UserInfo } from "@/src/component/Header";
 import Footer from "@/src/component/Footer";
@@ -8,20 +8,11 @@ import LoginModal from "@/src/component/modal/LoginModal";
 import CharacterGrid from "@/src/component/InformationPage/CharacterGrid";
 import InformationPageSkeleton from "@/src/component/InformationPage/InformationPageSkeleton";
 import InformationPageError from "@/src/component/InformationPage/InformationPageError";
-
-const GET_CHARACTERS = gql`
-  query GetCharacters($page: Int!, $name: String!) {
-    characters(page: $page, filter: { name: $name }) {
-      info {
-        count
-      }
-      results {
-        name
-        image
-      }
-    }
-  }
-`;
+import { GET_CHARACTERS } from "@/src/apollo/query/getCharacters";
+import type {
+  GetCharacters,
+  GetCharactersQueryVariables,
+} from "@/src/apollo/types/types";
 
 const InformationPage = () => {
   const {
@@ -37,27 +28,37 @@ const InformationPage = () => {
   } = useDisclosure();
 
   const [selectedItem, setSelectedItem] = useState<number | null>(null);
+  // TODO
   const [name, setName] = useState("rick");
   const [page, setPage] = useState(1);
-
-  const [userInfo, setUserInfo] = useState<UserInfo | undefined>(() => {
-    if (typeof window !== "undefined") {
-      const storedUserInfo = localStorage.getItem("userInfo");
-      return storedUserInfo ? JSON.parse(storedUserInfo) : undefined;
-    }
-    return undefined;
-  });
+  const [userInfo, setUserInfo] = useState<UserInfo | undefined>(undefined);
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
 
   useEffect(() => {
+    if (typeof window !== "undefined") {
+      const storedUserInfo = localStorage.getItem("userInfo");
+      setUserInfo(storedUserInfo ? JSON.parse(storedUserInfo) : undefined);
+      setIsInitialLoad(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (isInitialLoad) return;
+
     if (userInfo) {
       localStorage.setItem("userInfo", JSON.stringify(userInfo));
-    }else{
-      openLoginModal()
+      closeLoginModal();
+    } else {
+      openLoginModal();
     }
-  }, [userInfo]);
+  }, [userInfo, isInitialLoad, openLoginModal, closeLoginModal]);
 
-  const { data, loading, error } = useQuery(GET_CHARACTERS, {
+  const { data, loading, error } = useQuery<
+    GetCharacters,
+    GetCharactersQueryVariables
+  >(GET_CHARACTERS, {
     variables: { name, page },
+    skip: !userInfo,
   });
 
   if (loading) return <InformationPageSkeleton />;
@@ -79,10 +80,12 @@ const InformationPage = () => {
         }}
       ></Header>
 
-      <CharacterGrid
-        characters={characters}
-        onCharacterClick={handleClickItem}
-      />
+      {characters && (
+        <CharacterGrid
+          characters={characters}
+          onCharacterClick={handleClickItem}
+        />
+      )}
 
       <Footer page={page} setPage={setPage} />
 
@@ -99,7 +102,6 @@ const InformationPage = () => {
         onClose={closeLoginModal}
         onSubmit={(data: UserInfo) => {
           setUserInfo(data);
-          closeLoginModal();
         }}
       />
     </>

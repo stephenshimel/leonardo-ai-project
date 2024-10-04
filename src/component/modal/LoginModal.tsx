@@ -69,7 +69,7 @@ const LoginModal = ({
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered size="md">
-      <ModalOverlay />
+      <ModalOverlay backdropFilter="blur(50px)" />
       <ModalContent maxWidth="90%" width="400px">
         <ModalHeader>Enter User Information</ModalHeader>
         <ModalCloseButton />
