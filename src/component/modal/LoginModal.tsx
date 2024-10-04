@@ -22,7 +22,7 @@ const schema = yup.object().shape({
   jobTitle: yup.string().required("Job title is required"),
 });
 
-interface UserFormModalProps {
+interface LoginModal {
   isOpen: boolean;
   onClose: () => void;
   onSubmit: (data: { username: string; jobTitle: string }) => void;

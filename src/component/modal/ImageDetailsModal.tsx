@@ -9,7 +9,11 @@ interface ModalProps {
   } | null; // Allow null if no character is selected
 }
 
-export const CustomizedModal = ({ isOpen, onClose, character }: ModalProps) => {
+export const ImageDetailsModal = ({
+  isOpen,
+  onClose,
+  character,
+}: ModalProps) => {
   if (!character) return null; // If no character is selected, don't render anything
 
   return (
@@ -19,7 +23,9 @@ export const CustomizedModal = ({ isOpen, onClose, character }: ModalProps) => {
         <ModalHeader>{character.name}</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          {character.image && <Image src={character.image} alt={character.name} />}
+          {character.image && (
+            <Image src={character.image} alt={character.name} />
+          )}
           <Text mt={4}>{character.name}</Text>
         </ModalBody>
       </ModalContent>

@@ -1,12 +1,16 @@
 import { Flex, Box, Text, Button } from '@chakra-ui/react';
 
-interface HeaderProps {
+export type UserInfo = {
   username: string;
   jobTitle: string;
-  onChangeUser: () => void; // Function to be called when "Change User" button is clicked
+};
+
+interface HeaderProps {
+  userInfo?: UserInfo;
+  onChangeUser: () => void;
 }
 
-export const Header = ({ username, jobTitle, onChangeUser }: HeaderProps) => {
+export const Header = ({ userInfo, onChangeUser }: HeaderProps) => {
   return (
     <Flex
       as="header"
@@ -28,9 +32,9 @@ export const Header = ({ username, jobTitle, onChangeUser }: HeaderProps) => {
       <Flex alignItems="center">
         <Box textAlign="right" mr={4}>
           <Text fontSize="md" fontWeight="bold">
-            {username}
+            {userInfo?.username}
           </Text>
-          <Text fontSize="sm">{jobTitle}</Text>
+          <Text fontSize="sm">{userInfo?.jobTitle}</Text>
         </Box>
 
         <Button colorScheme="orange" variant="outline" onClick={onChangeUser}>

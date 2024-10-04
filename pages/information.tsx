@@ -9,17 +9,10 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalCloseButton,
-} from "@chakra-ui/react";
-import { Header } from "@/src/component/Header";
+import { Header, UserInfo } from "@/src/component/Header";
 import Footer from "@/src/component/Footer";
-import { CustomizedModal } from "@/src/component/modal/CustomizedModal";
+import { ImageDetailsModal } from "@/src/component/modal/ImageDetailsModal";
+import LoginModal from "@/src/component/modal/LoginModal";
 
 const GET_CHARACTERS = gql`
   query GetCharacters($page: Int!, $name: String!) {
@@ -36,16 +29,24 @@ const GET_CHARACTERS = gql`
 `;
 
 const InformationPage = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    isOpen: isImageDetailsModalOpen,
+    onOpen: openImageDetailsModal,
+    onClose: closeImageDetailsModal,
+  } = useDisclosure();
+
+  const {
+    isOpen: isLoginModalOpen,
+    onOpen: openLoginModal,
+    onClose: closeLoginModal,
+  } = useDisclosure();
+
   const [selectedItem, setSelectedItem] = useState<number>();
 
   const [name, setName] = useState("rick");
   const [page, setPage] = useState(1);
 
-  const [userInfo, setUserInfo] = useState<{
-    username: string;
-    jobTitle: string;
-  } | null>(null);
+  const [userInfo, setUserInfo] = useState<UserInfo | undefined>(undefined);
   const { data, loading, error } = useQuery(GET_CHARACTERS, {
     variables: { name, page },
     onError: (error) => {
@@ -58,16 +59,17 @@ const InformationPage = () => {
 
   const handleClickItem = (item: number) => {
     setSelectedItem(item);
-    onOpen();
+    openImageDetailsModal();
   };
 
   const characters = data?.characters.results;
   return (
     <>
       <Header
-        username="username"
-        jobTitle="jobTitle"
-        onChangeUser={() => {}}
+        userInfo={userInfo}
+        onChangeUser={() => {
+          openLoginModal();
+        }}
       ></Header>
       <Box p={8}>
         <Grid templateColumns="repeat(3, 1fr)" gap={6}>
@@ -91,12 +93,21 @@ const InformationPage = () => {
         <Footer page={page} setPage={setPage} />
 
         {selectedItem && (
-          <CustomizedModal
-            isOpen={isOpen}
-            onClose={onClose}
+          <ImageDetailsModal
+            isOpen={isImageDetailsModalOpen}
+            onClose={closeImageDetailsModal}
             character={characters[selectedItem]}
           />
         )}
+
+        <LoginModal
+          isOpen={isLoginModalOpen}
+          onClose={closeLoginModal}
+          onSubmit={(data) => {
+            setUserInfo(data);
+            closeLoginModal();
+          }}
+        />
       </Box>
     </>
   );
