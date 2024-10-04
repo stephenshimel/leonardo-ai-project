@@ -1,5 +1,5 @@
 import { Box, Button } from '@chakra-ui/react';
-import router from "next/router";
+import { useRouter } from "next/router";
 import { useEffect } from "react";
 
 interface FooterProps {
@@ -8,6 +8,7 @@ interface FooterProps {
 }
 
 const Footer = ({ page, setPage }: FooterProps) => {
+  const router = useRouter();
   const handlePageChange = (newPage: number) => {
     router.push({
       pathname: router.pathname,
