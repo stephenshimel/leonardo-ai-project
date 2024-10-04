@@ -1,13 +1,14 @@
-import { Box, Button } from '@chakra-ui/react';
+import { Box, Button } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import { footerContainerStyles, buttonStyles } from "./styles";
 
 interface FooterProps {
   page: number;
   setPage: (newPage: number) => void;
 }
 
-const Footer = ({ page, setPage }: FooterProps) => {
+export const Footer = ({ page, setPage }: FooterProps) => {
   const router = useRouter();
   const handlePageChange = (newPage: number) => {
     router.push({
@@ -23,19 +24,16 @@ const Footer = ({ page, setPage }: FooterProps) => {
   }, [router.query.page]);
 
   return (
-    <Box mt={4} textAlign="center">
+    <Box {...footerContainerStyles}>
       <Button
         onClick={() => handlePageChange(page - 1)}
         isDisabled={page === 1}
       >
         Previous
       </Button>
-      <Button onClick={() => handlePageChange(page + 1)} ml={4}>
+      <Button onClick={() => handlePageChange(page + 1)} {...buttonStyles}>
         Next
       </Button>
     </Box>
   );
 };
-
-// TODO: use const export
-export default Footer;

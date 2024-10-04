@@ -1,9 +1,9 @@
 import { useDisclosure } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { Header, UserInfo } from "@/src/component/Header";
-import Footer from "@/src/component/Footer";
 import LoginModal from "@/src/component/modal/LoginModal";
-import CharacterGrid from "@/src/component/InformationPage/CharacterGrid";
+import { CharacterGrid } from "@/src/component/InformationPage/CharacterGrid";
+import { Footer } from "@/src/component/Footer";
+import { Header, UserInfo } from "@/src/component/Header";
 
 const InformationPage = () => {
   const {
@@ -29,9 +29,8 @@ const InformationPage = () => {
 
     if (userInfo) {
       localStorage.setItem("userInfo", JSON.stringify(userInfo));
-      closeLoginModal();
     } else {
-      openLoginModal();
+      openLoginModal(); // when user is not logged in, always show login modal to block the access to the info page
     }
   }, [userInfo, isInitialLoad, openLoginModal, closeLoginModal]);
 

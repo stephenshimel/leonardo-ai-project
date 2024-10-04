@@ -2,16 +2,18 @@ import React, { useState } from "react";
 import { Box, Grid, useDisclosure } from "@chakra-ui/react";
 import { useQuery } from "@apollo/client";
 
-import { ImageDetailsModal } from "../modal/ImageDetailsModal";
+import { ImageDetailsModal } from "../../modal/ImageDetailsModal";
 import { GET_CHARACTERS } from "@/src/apollo/query/getCharacters";
 import type {
   GetCharacters,
   GetCharactersQueryVariables,
 } from "@/src/apollo/types/types";
-import InformationPageError from "./Error/InformationPageError";
-import InformationPageSkeleton from "../Loading/InformationPageSkeleton";
-import { CharacterCard } from "./CharacterCard";
+import InformationPageError from "../Error/InformationPageError";
+import InformationPageSkeleton from "../../Loading/InformationPageSkeleton";
+import { CharacterCard } from "../CharacterCard";
+import { containerStyles, gridStyles } from "./styles";
 import { UserInfo } from "@/src/component/Header";
+
 interface CharacterGridProps {
   page: number;
   userInfo?: UserInfo;
@@ -51,16 +53,8 @@ export const CharacterGrid: React.FC<CharacterGridProps> = ({
 
   return (
     <>
-      {/* TODO: seperate css code */}
-      <Box p={8}>
-        <Grid
-          templateColumns={{
-            base: "repeat(2, 1fr)",
-            md: "repeat(3, 1fr)",
-            lg: "repeat(6, 1fr)",
-          }}
-          gap={6}
-        >
+      <Box {...containerStyles}>
+        <Grid {...gridStyles}>
           {characters.map((character, index) => (
             <CharacterCard
               key={index}
@@ -82,4 +76,3 @@ export const CharacterGrid: React.FC<CharacterGridProps> = ({
     </>
   );
 };
-
