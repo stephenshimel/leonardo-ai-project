@@ -17,9 +17,9 @@ export const ImageDetailsModal = ({
   if (!character) return null; // If no character is selected, don't render anything
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={onClose} size="md">
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent maxWidth="90%" width="400px">
         <ModalHeader>{character.name}</ModalHeader>
         <ModalCloseButton />
         <ModalBody>

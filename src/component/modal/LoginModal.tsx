@@ -10,6 +10,7 @@ import {
   Input,
   Button,
   useToast,
+  FormErrorMessage,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -29,12 +30,12 @@ interface LoginModal {
   defaultValues?: { username: string; jobTitle: string };
 }
 
-const UserFormModal = ({
+const LoginModal = ({
   isOpen,
   onClose,
   onSubmit,
   defaultValues,
-}: UserFormModalProps) => {
+}: LoginModal) => {
   const toast = useToast();
 
   // Initialize form with React Hook Form and Yup
@@ -56,20 +57,20 @@ const UserFormModal = ({
   }, [defaultValues, reset]);
 
   const handleFormSubmit = (data: { username: string; jobTitle: string }) => {
-    onSubmit(data); // Call the onSubmit prop to save data
+    onSubmit(data);
     toast({
       title: "User information saved.",
       status: "success",
       duration: 2000,
       isClosable: true,
     });
-    onClose(); // Close the modal after submission
+    onClose();
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} isCentered>
+    <Modal isOpen={isOpen} onClose={onClose} isCentered size="md">
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent maxWidth="90%" width="400px">
         <ModalHeader>Enter User Information</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
@@ -81,7 +82,7 @@ const UserFormModal = ({
                 placeholder="Enter your username"
               />
               {errors.username && (
-                <p style={{ color: "red" }}>{errors.username.message}</p>
+                <FormErrorMessage>{errors.username.message}</FormErrorMessage>
               )}
             </FormControl>
 
@@ -92,7 +93,7 @@ const UserFormModal = ({
                 placeholder="Enter your job title"
               />
               {errors.jobTitle && (
-                <p style={{ color: "red" }}>{errors.jobTitle.message}</p>
+                <FormErrorMessage>{errors.jobTitle.message}</FormErrorMessage>
               )}
             </FormControl>
 
@@ -106,4 +107,4 @@ const UserFormModal = ({
   );
 };
 
-export default UserFormModal;
+export default LoginModal;

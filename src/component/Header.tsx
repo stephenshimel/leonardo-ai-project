@@ -7,7 +7,7 @@ export type UserInfo = {
 
 interface HeaderProps {
   userInfo?: UserInfo;
-  onChangeUser: () => void;
+  onChangeUser?: () => void;
 }
 
 export const Header = ({ userInfo, onChangeUser }: HeaderProps) => {
