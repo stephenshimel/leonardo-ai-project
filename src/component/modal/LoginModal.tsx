@@ -18,15 +18,15 @@ import { useEffect } from "react";
 import { UserInfo } from "../Header";
 import { schema } from "@/src/validation/schema";
 
+
 interface LoginModal {
   userInfo?: UserInfo;
+  setUserInfo: (userInfo: UserInfo) => void;
   isOpen: boolean;
   onClose: () => void;
-  onSubmit: (data: { username: string; jobTitle: string }) => void;
-  defaultValues?: { username: string; jobTitle: string };
 }
 
-const LoginModal = ({ userInfo, isOpen, onClose, onSubmit }: LoginModal) => {
+const LoginModal = ({ userInfo, setUserInfo, isOpen, onClose }: LoginModal) => {
   const toast = useToast();
 
   const {
@@ -40,13 +40,13 @@ const LoginModal = ({ userInfo, isOpen, onClose, onSubmit }: LoginModal) => {
   });
 
   useEffect(() => {
-    if (userInfo) {
+    if (isOpen) {
       reset(userInfo);
     }
-  }, [userInfo, reset]);
+  }, [isOpen, userInfo, reset]);
 
   const handleFormSubmit = (data: { username: string; jobTitle: string }) => {
-    onSubmit(data);
+    setUserInfo(data);
     toast({
       title: "User information saved.",
       status: "success",
@@ -57,7 +57,9 @@ const LoginModal = ({ userInfo, isOpen, onClose, onSubmit }: LoginModal) => {
   };
 
   const handleClose = () => {
+    // when userInfo is undefined, user is not allowed to manually close the modal
     if (userInfo !== undefined) {
+      reset(userInfo); // discard unsaved change
       onClose();
     }
   };

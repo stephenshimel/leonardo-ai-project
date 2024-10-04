@@ -50,11 +50,9 @@ const InformationPage = () => {
 
       <LoginModal
         userInfo={userInfo}
+        setUserInfo={setUserInfo}
         isOpen={isLoginModalOpen}
         onClose={closeLoginModal}
-        onSubmit={(data: UserInfo) => {
-          setUserInfo(data);
-        }}
       />
     </>
   );
