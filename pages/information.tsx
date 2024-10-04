@@ -12,8 +12,6 @@ const InformationPage = () => {
     onClose: closeLoginModal,
   } = useDisclosure();
 
-  // TODO
-  const [name, setName] = useState("rick");
   const [page, setPage] = useState(1);
   const [userInfo, setUserInfo] = useState<UserInfo | undefined>(undefined);
   const [isInitialLoad, setIsInitialLoad] = useState(true);
@@ -46,11 +44,12 @@ const InformationPage = () => {
         }}
       ></Header>
 
-      <CharacterGrid characterName={name} page={page} />
+      <CharacterGrid page={page} userInfo={userInfo} />
 
       <Footer page={page} setPage={setPage} />
 
       <LoginModal
+        userInfo={userInfo}
         isOpen={isLoginModalOpen}
         onClose={closeLoginModal}
         onSubmit={(data: UserInfo) => {
@@ -67,4 +66,4 @@ export default InformationPage;
 // TODO: cypress tests
 // TODO: Readme file
 // TODO: accessibility,
-
+// TODO: add a bit more code comments

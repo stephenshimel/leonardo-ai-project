@@ -13,32 +13,22 @@ import {
   FormErrorMessage,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
-import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect } from "react";
-
-// Define schema for validation using Yup
-const schema = yup.object().shape({
-  username: yup.string().required("Username is required"),
-  jobTitle: yup.string().required("Job title is required"),
-});
+import { UserInfo } from "../Header";
+import { schema } from "@/src/validation/schema";
 
 interface LoginModal {
+  userInfo?: UserInfo;
   isOpen: boolean;
   onClose: () => void;
   onSubmit: (data: { username: string; jobTitle: string }) => void;
   defaultValues?: { username: string; jobTitle: string };
 }
 
-const LoginModal = ({
-  isOpen,
-  onClose,
-  onSubmit,
-  defaultValues,
-}: LoginModal) => {
+const LoginModal = ({ userInfo, isOpen, onClose, onSubmit }: LoginModal) => {
   const toast = useToast();
 
-  // Initialize form with React Hook Form and Yup
   const {
     register,
     handleSubmit,
@@ -46,15 +36,14 @@ const LoginModal = ({
     reset,
   } = useForm({
     resolver: yupResolver(schema),
-    defaultValues,
+    defaultValues: userInfo,
   });
 
-  // Reset form with default values when opening the modal
   useEffect(() => {
-    if (defaultValues) {
-      reset(defaultValues);
+    if (userInfo) {
+      reset(userInfo);
     }
-  }, [defaultValues, reset]);
+  }, [userInfo, reset]);
 
   const handleFormSubmit = (data: { username: string; jobTitle: string }) => {
     onSubmit(data);
@@ -67,12 +56,18 @@ const LoginModal = ({
     onClose();
   };
 
+  const handleClose = () => {
+    if (userInfo !== undefined) {
+      onClose();
+    }
+  };
+
   return (
-    <Modal isOpen={isOpen} onClose={onClose} isCentered size="md">
+    <Modal isOpen={isOpen} onClose={handleClose} isCentered size="lg">
       <ModalOverlay backdropFilter="blur(50px)" />
-      <ModalContent maxWidth="90%" width="400px">
+      <ModalContent maxWidth="90%" width="500px" p={8}>
         <ModalHeader>Enter User Information</ModalHeader>
-        <ModalCloseButton />
+        {userInfo && <ModalCloseButton />}
         <ModalBody>
           <form onSubmit={handleSubmit(handleFormSubmit)}>
             <FormControl mb={4} isInvalid={!!errors.username}>

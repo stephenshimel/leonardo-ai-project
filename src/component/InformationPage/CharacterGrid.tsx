@@ -11,17 +11,15 @@ import type {
 } from "@/src/apollo/types/types";
 import InformationPageError from "./InformationPageError";
 import InformationPageSkeleton from "./InformationPageSkeleton";
-
+import { UserInfo } from "@/src/component/Header";
 interface CharacterGridProps {
-  characterName: string;
   page: number;
+  userInfo?: UserInfo;
 }
 
-const CharacterGrid: React.FC<CharacterGridProps> = ({
-  characterName,
-  page,
-}) => {
+const CharacterGrid: React.FC<CharacterGridProps> = ({ page, userInfo }) => {
   const [selectedItem, setSelectedItem] = useState<number | undefined>();
+  const [characterName] = useState("rick");
 
   const {
     isOpen: isImageDetailsModalOpen,
@@ -40,6 +38,7 @@ const CharacterGrid: React.FC<CharacterGridProps> = ({
   >(GET_CHARACTERS, {
     // TODO: make numbers of cards on each page take full width on last row
     variables: { name: characterName, page },
+    skip: userInfo === undefined,
   });
 
   if (loading) return <InformationPageSkeleton />;

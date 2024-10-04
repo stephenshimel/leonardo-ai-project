@@ -17,7 +17,6 @@ const InformationPageError: React.FC<InformationPageErrorProps> = ({
         We're sorry, but there was an error retrieving the character
         information.
       </Text>
-      <Text>Error details: {error.message}</Text>
     </Box>
   );
 };

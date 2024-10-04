@@ -1,5 +1,6 @@
 import { Flex, Box, Text, Button } from '@chakra-ui/react';
 
+// TODO: move types to separate file
 export type UserInfo = {
   username: string;
   jobTitle: string;
@@ -30,12 +31,14 @@ export const Header = ({ userInfo, onChangeUser }: HeaderProps) => {
 
       {/* Right side - Username, Job Title, and Change User button */}
       <Flex alignItems="center">
-        <Box textAlign="right" mr={4}>
-          <Text fontSize="md" fontWeight="bold">
-            {userInfo?.username}
-          </Text>
-          <Text fontSize="sm">{userInfo?.jobTitle}</Text>
-        </Box>
+        {userInfo && (
+          <Box textAlign="right" mr={4}>
+            <Text fontSize="md" fontWeight="bold">
+              {userInfo.username}
+            </Text>
+            <Text fontSize="sm">{userInfo.jobTitle}</Text>
+          </Box>
+        )}
 
         <Button colorScheme="orange" variant="outline" onClick={onChangeUser}>
           Change User
