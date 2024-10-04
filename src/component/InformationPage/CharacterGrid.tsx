@@ -1,41 +1,83 @@
-import React from "react";
-import { Box, Grid, Image, Text } from "@chakra-ui/react";
-import CharacterCard from "./CharacterCard";
+import React, { useState } from "react";
+import { Box, Grid, useDisclosure } from "@chakra-ui/react";
+import { useQuery } from "@apollo/client";
 
-interface Character {
-  name: string;
-  image: string;
-}
+import CharacterCard from "./CharacterCard";
+import { ImageDetailsModal } from "../modal/ImageDetailsModal";
+import { GET_CHARACTERS } from "@/src/apollo/query/getCharacters";
+import type {
+  GetCharacters,
+  GetCharactersQueryVariables,
+} from "@/src/apollo/types/types";
+import InformationPageError from "./InformationPageError";
+import InformationPageSkeleton from "./InformationPageSkeleton";
 
 interface CharacterGridProps {
-  characters: Character[];
-  onCharacterClick: (index: number) => void;
+  characterName: string;
+  page: number;
 }
 
 const CharacterGrid: React.FC<CharacterGridProps> = ({
-  characters,
-  onCharacterClick,
+  characterName,
+  page,
 }) => {
+  const [selectedItem, setSelectedItem] = useState<number | undefined>();
+
+  const {
+    isOpen: isImageDetailsModalOpen,
+    onOpen: openImageDetailsModal,
+    onClose: closeImageDetailsModal,
+  } = useDisclosure();
+
+  const handleClickItem = (item: number) => {
+    setSelectedItem(item);
+    openImageDetailsModal();
+  };
+
+  const { data, loading, error } = useQuery<
+    GetCharacters,
+    GetCharactersQueryVariables
+  >(GET_CHARACTERS, {
+    // TODO: make numbers of cards on each page take full width on last row
+    variables: { name: characterName, page },
+  });
+
+  if (loading) return <InformationPageSkeleton />;
+  if (error) return <InformationPageError error={error} />;
+
+  const characters = data?.characters.results || [];
+
   return (
-    <Box p={8}>
-      <Grid
-        templateColumns={{
-          base: "repeat(2, 1fr)",
-          md: "repeat(3, 1fr)",
-          lg: "repeat(6, 1fr)",
-        }}
-        gap={6}
-      >
-        {characters.map((character, index: number) => (
-          <CharacterCard
-            key={index}
-            name={character.name}
-            image={character.image}
-            onClick={() => onCharacterClick(index)}
-          />
-        ))}
-      </Grid>
-    </Box>
+    <>
+      {/* TODO: seperate css code */}
+      <Box p={8}>
+        <Grid
+          templateColumns={{
+            base: "repeat(2, 1fr)",
+            md: "repeat(3, 1fr)",
+            lg: "repeat(6, 1fr)",
+          }}
+          gap={6}
+        >
+          {characters.map((character, index: number) => (
+            <CharacterCard
+              key={index}
+              name={character.name}
+              image={character.image}
+              onClick={() => handleClickItem(index)}
+            />
+          ))}
+        </Grid>
+      </Box>
+
+      {selectedItem !== undefined && (
+        <ImageDetailsModal
+          isOpen={isImageDetailsModalOpen}
+          onClose={closeImageDetailsModal}
+          character={characters[selectedItem]}
+        />
+      )}
+    </>
   );
 };
 
