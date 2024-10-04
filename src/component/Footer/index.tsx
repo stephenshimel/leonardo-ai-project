@@ -1,6 +1,6 @@
 import { Box, Button } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { footerContainerStyles, buttonStyles } from "./styles";
 
 interface FooterProps {
