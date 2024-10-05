@@ -12,7 +12,7 @@ const InformationPage = () => {
     onClose: closeLoginModal,
   } = useDisclosure();
 
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState<number>();
   const [userInfo, setUserInfo] = useState<UserInfo | undefined>(undefined);
   const [isInitialLoad, setIsInitialLoad] = useState(true);
 

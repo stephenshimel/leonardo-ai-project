@@ -13,14 +13,15 @@ import InformationPageSkeleton from "../../Loading/InformationPageSkeleton";
 import { CharacterCard } from "../CharacterCard";
 import { containerStyles, gridStyles } from "./styles";
 import { UserInfo } from "@/src/component/Header";
+import { isValidPageNumber } from "@/src/util/util";
 
 interface CharacterGridProps {
-  page: number;
+  page?: number;
   userInfo?: UserInfo;
 }
 
 export const CharacterGrid: React.FC<CharacterGridProps> = ({
-  page,
+  page = NaN,
   userInfo,
 }) => {
   const [selectedItem, setSelectedItem] = useState<number | undefined>();
@@ -43,7 +44,7 @@ export const CharacterGrid: React.FC<CharacterGridProps> = ({
   >(GET_CHARACTERS, {
     // TODO: make numbers of cards on each page take full width on last row
     variables: { name: characterName, page },
-    skip: userInfo === undefined,
+    skip: userInfo === undefined || !isValidPageNumber(page),
   });
 
   if (loading) return <InformationPageSkeleton />;
