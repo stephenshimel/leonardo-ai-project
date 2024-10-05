@@ -2,7 +2,7 @@ import { Box, Button } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { footerContainerStyles, buttonStyles } from "./styles";
-import { isValidPageNumber } from "@/src/util/util";
+import { isValidPageNumber, redirectToPage } from "@/src/util/util";
 
 interface FooterProps {
   page?: number;
@@ -26,14 +26,7 @@ export const Footer = ({ page, setPage }: FooterProps) => {
     const validPage = isValidPageNumber(pageFromUrl) ? pageFromUrl : 1;
 
     if (validPage !== page) {
-      router.replace(
-        {
-          pathname: router.pathname,
-          query: { ...router.query, page: validPage },
-        },
-        undefined,
-        { shallow: true },
-      ); //TODO: move redirect to first page to a util
+      redirectToPage(router, validPage);
       setPage(validPage);
     }
   }, [router, setPage, page]);
