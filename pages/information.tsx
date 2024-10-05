@@ -1,5 +1,5 @@
 import { useDisclosure } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import LoginModal from "@/src/component/modal/LoginModal";
 import { CharacterGrid } from "@/src/component/InformationPage/CharacterGrid";
 import { Footer } from "@/src/component/Footer";

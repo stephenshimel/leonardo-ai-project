@@ -1,4 +1,14 @@
-import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalCloseButton, Image, Text } from '@chakra-ui/react';
+import React from "react";
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalCloseButton,
+  Image,
+  Text,
+} from "@chakra-ui/react";
 
 interface ModalProps {
   isOpen: boolean;
@@ -32,4 +42,3 @@ export const ImageDetailsModal = ({
     </Modal>
   );
 };
-

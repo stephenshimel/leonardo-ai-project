@@ -1,4 +1,5 @@
 import { Flex, Box, Text, Button } from "@chakra-ui/react";
+import React from "react";
 import {
   headerContainerStyles,
   logoContainerStyles,

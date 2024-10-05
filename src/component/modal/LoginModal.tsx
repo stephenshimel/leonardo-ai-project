@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Modal,
   ModalOverlay,
@@ -17,7 +18,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect } from "react";
 import { UserInfo } from "../Header";
 import { schema } from "@/src/validation/schema";
-
 
 interface LoginModal {
   userInfo?: UserInfo;
