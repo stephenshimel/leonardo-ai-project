@@ -10,7 +10,7 @@ import type {
 } from "@/src/apollo/types/types";
 import InformationPageError from "./Error/InformationPageError";
 import InformationPageSkeleton from "../Loading/InformationPageSkeleton";
-import { CharacterCard } from "./CharacterCard";
+import { CharacterCard } from "./CharacterGrid/CharacterCard";
 import { UserInfo } from "@/src/component/Header";
 interface CharacterGridProps {
   page: number;

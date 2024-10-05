@@ -24,14 +24,19 @@ import {
   submitButtonStyles,
 } from "./styles";
 
-interface LoginModal {
+type LoginModalProps = {
   userInfo?: UserInfo;
   setUserInfo: (userInfo: UserInfo) => void;
   isOpen: boolean;
   onClose: () => void;
-}
+};
 
-const LoginModal = ({ userInfo, setUserInfo, isOpen, onClose }: LoginModal) => {
+const LoginModal = ({
+  userInfo,
+  setUserInfo,
+  isOpen,
+  onClose,
+}: LoginModalProps) => {
   const toast = useToast();
 
   const {

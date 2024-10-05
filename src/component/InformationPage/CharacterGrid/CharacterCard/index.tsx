@@ -8,11 +8,11 @@ import {
   textStyles,
 } from "./styles";
 
-interface CharacterCardProps {
+type CharacterCardProps = {
   name: string;
   image: string;
   onClick: () => void;
-}
+};
 
 export const CharacterCard: React.FC<CharacterCardProps> = ({
   name,

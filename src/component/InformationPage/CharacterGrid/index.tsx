@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Grid, useDisclosure } from "@chakra-ui/react";
 import { useQuery } from "@apollo/client";
 
@@ -10,14 +10,14 @@ import type {
 } from "@/src/apollo/types/types";
 import InformationPageError from "../Error/InformationPageError";
 import InformationPageSkeleton from "../../Loading/InformationPageSkeleton";
-import { CharacterCard } from "../CharacterCard";
+import { CharacterCard } from "./CharacterCard";
 import { containerStyles, gridStyles } from "./styles";
 import { UserInfo } from "@/src/component/Header";
 import { isValidPageNumber } from "@/src/util/util";
 
 interface CharacterGridProps {
   page?: number;
-  userInfo?: UserInfo;
+  userInfo?: UserInfo; //TODO: just pass hasLoggedIn
 }
 
 export const CharacterGrid: React.FC<CharacterGridProps> = ({

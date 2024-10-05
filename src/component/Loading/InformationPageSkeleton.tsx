@@ -11,13 +11,13 @@ import {
 
 const InformationPageSkeleton: React.FC = () => {
   return (
-    <Box {...containerStyles}>
-      <Grid {...gridStyles}>
+    <Box {...containerStyles} data-testid="skeleton-container">
+      <Grid {...gridStyles} data-testid="skeleton-grid">
         {[...Array(18)].map((_, index) => (
-          <Box key={index} {...cardStyles}>
-            <Skeleton {...imageSkeletonStyles} />
+          <Box key={index} {...cardStyles} role="article">
+            <Skeleton {...imageSkeletonStyles} data-testid="skeleton-image" />
             <Box {...textSkeletonContainerStyles}>
-              <Skeleton {...textSkeletonStyles} />
+              <Skeleton {...textSkeletonStyles} data-testid="skeleton-text" />
             </Box>
           </Box>
         ))}
