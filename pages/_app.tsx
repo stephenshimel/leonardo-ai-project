@@ -1,3 +1,4 @@
+import React from "react";
 import client from "@/src/apollo/client";
 import { ApolloProvider } from "@apollo/client";
 import { ChakraProvider } from "@chakra-ui/react";
