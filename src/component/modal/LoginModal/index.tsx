@@ -16,8 +16,13 @@ import {
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect } from "react";
-import { UserInfo } from "../Header";
+import { UserInfo } from "../../Header";
 import { schema } from "@/src/validation/schema";
+import {
+  modalContentStyles,
+  formControlStyles,
+  submitButtonStyles,
+} from "./styles";
 
 interface LoginModal {
   userInfo?: UserInfo;
@@ -67,12 +72,12 @@ const LoginModal = ({ userInfo, setUserInfo, isOpen, onClose }: LoginModal) => {
   return (
     <Modal isOpen={isOpen} onClose={handleClose} isCentered size="lg">
       <ModalOverlay backdropFilter="blur(50px)" />
-      <ModalContent maxWidth="90%" width="500px" p={8}>
+      <ModalContent {...modalContentStyles}>
         <ModalHeader>Enter User Information</ModalHeader>
         {userInfo && <ModalCloseButton />}
         <ModalBody>
           <form onSubmit={handleSubmit(handleFormSubmit)}>
-            <FormControl mb={4} isInvalid={!!errors.username}>
+            <FormControl {...formControlStyles} isInvalid={!!errors.username}>
               <FormLabel>Username</FormLabel>
               <Input
                 {...register("username")}
@@ -83,7 +88,7 @@ const LoginModal = ({ userInfo, setUserInfo, isOpen, onClose }: LoginModal) => {
               )}
             </FormControl>
 
-            <FormControl mb={4} isInvalid={!!errors.jobTitle}>
+            <FormControl {...formControlStyles} isInvalid={!!errors.jobTitle}>
               <FormLabel>Job Title</FormLabel>
               <Input
                 {...register("jobTitle")}
@@ -94,7 +99,12 @@ const LoginModal = ({ userInfo, setUserInfo, isOpen, onClose }: LoginModal) => {
               )}
             </FormControl>
 
-            <Button colorScheme="teal" type="submit" width="full">
+            <Button
+              colorScheme="teal"
+              type="submit"
+              width="full"
+              {...submitButtonStyles}
+            >
               Save
             </Button>
           </form>

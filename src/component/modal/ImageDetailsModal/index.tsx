@@ -8,15 +8,15 @@ import {
   ModalCloseButton,
   Image,
   Text,
+  VStack,
 } from "@chakra-ui/react";
+import { Character } from "@/src/apollo/types/types";
+import { modalContentStyles, imageStyles, vStackStyles } from "./styles";
 
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
-  character: {
-    name: string;
-    image: string;
-  } | null; // Allow null if no character is selected
+  character?: Character; // Allow null if no character is selected
 }
 
 export const ImageDetailsModal = ({
@@ -29,14 +29,25 @@ export const ImageDetailsModal = ({
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="md">
       <ModalOverlay />
-      <ModalContent maxWidth="90%" width="400px">
+      <ModalContent {...modalContentStyles}>
         <ModalHeader>{character.name}</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           {character.image && (
-            <Image src={character.image} alt={character.name} />
+            <Image
+              src={character.image}
+              alt={character.name}
+              {...imageStyles}
+            />
           )}
-          <Text mt={4}>{character.name}</Text>
+          <VStack {...vStackStyles}>
+            <Text>
+              <strong>Name:</strong> {character.name}
+            </Text>
+            <Text>
+              <strong>Location:</strong> {character.location.name}
+            </Text>
+          </VStack>
         </ModalBody>
       </ModalContent>
     </Modal>

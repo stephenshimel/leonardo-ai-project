@@ -7,8 +7,13 @@ export const GET_CHARACTERS = gql`
         count
       }
       results {
+        id
         name
         image
+        location {
+          id
+          name
+        }
       }
     }
   }
