@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useCallback } from "react";
 import { Box, Grid, useDisclosure } from "@chakra-ui/react";
 import { useQuery } from "@apollo/client";
 
@@ -8,12 +8,12 @@ import type {
   GetCharacters,
   GetCharactersQueryVariables,
 } from "@/src/apollo/types/types";
-import InformationPageError from "../Error/InformationPageError";
 import InformationPageSkeleton from "../../Loading/InformationPageSkeleton";
 import { CharacterCard } from "./CharacterCard";
 import { containerStyles, gridStyles } from "./styles";
 import { isValidPageNumber } from "@/src/util/util";
-import { UserInfo } from "../../types";
+import { InformationPageError } from "../Error/InformationPageError";
+
 interface CharacterGridProps {
   page?: number;
   hasUserInfo: boolean;
@@ -24,7 +24,7 @@ export const CharacterGrid: React.FC<CharacterGridProps> = ({
   hasUserInfo,
 }) => {
   const [selectedItem, setSelectedItem] = useState<number | undefined>();
-  const [characterName] = useState("rick");
+  const characterName = "rick"; // Move this to a constant or prop if it doesn't change
 
   const {
     isOpen: isImageDetailsModalOpen,
@@ -32,10 +32,13 @@ export const CharacterGrid: React.FC<CharacterGridProps> = ({
     onClose: closeImageDetailsModal,
   } = useDisclosure();
 
-  const handleClickItem = (item: number) => {
-    setSelectedItem(item);
-    openImageDetailsModal();
-  };
+  const handleClickItem = useCallback(
+    (item: number) => {
+      setSelectedItem(item);
+      openImageDetailsModal();
+    },
+    [openImageDetailsModal, setSelectedItem],
+  );
 
   const { data, loading, error } = useQuery<
     GetCharacters,
@@ -46,7 +49,8 @@ export const CharacterGrid: React.FC<CharacterGridProps> = ({
   });
 
   if (loading) return <InformationPageSkeleton />;
-  if (error) return <InformationPageError error={error} />;
+
+  if (error) return <InformationPageError />;
 
   const characters = data?.characters.results || [];
 
@@ -56,7 +60,7 @@ export const CharacterGrid: React.FC<CharacterGridProps> = ({
         <Grid {...gridStyles} aria-label="Grid of Rick and Morty characters">
           {characters.map((character, index) => (
             <CharacterCard
-              key={index}
+              key={character.id}
               name={character.name}
               image={character.image}
               onClick={() => handleClickItem(index)}
