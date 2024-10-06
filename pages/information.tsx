@@ -59,6 +59,5 @@ const InformationPage = () => {
 
 export default InformationPage;
 
-// TODO: Readme file
 // TODO: accessibility,
 // TODO: add a bit more code comments
