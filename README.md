@@ -55,7 +55,7 @@ Here's a demonstration of Cypress E2E tests in action:
 
 This application is deployed on Vercel. You can access the live version at:
 
-https://leonardo-ai-project-git-main-stephenshimels-projects.vercel.app
+https://leonardo-ai-project.vercel.app
 
 ## Usage
 
