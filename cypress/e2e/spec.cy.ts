@@ -1,5 +1,6 @@
 const userName = "testuser";
 const jobTitle = "Developer";
+const baseUrl = "http://localhost:3000/information";
 
 const login = () => {
   cy.get('input[name="username"]').type(userName);
@@ -9,11 +10,11 @@ const login = () => {
 
 describe("Rick and Morty Character Gallery", () => {
   beforeEach(() => {
-    cy.visit("http://localhost:3000");
+    cy.visit(`${baseUrl}?page=1`);
   });
 
   it("should redirect to information page and open login modal", () => {
-    cy.url().should("eq", "http://localhost:3000/information?page=1");
+    cy.url().should("eq", `${baseUrl}?page=1`);
     cy.get('[role="dialog"]').should("be.visible");
     cy.get('[role="dialog"]')
       .contains("Enter User Information")
@@ -83,7 +84,7 @@ describe("Rick and Morty Character Gallery", () => {
     cy.get("button").contains("Previous").click();
     cy.url().should("include", "page=1");
     // Test navigation by editing URL
-    cy.visit("http://localhost:3000/information/?page=2");
+    cy.visit(`${baseUrl}?page=2`);
     cy.url().should("include", "page=2");
     cy.get("button").contains("Previous").should("be.enabled");
 
@@ -91,11 +92,11 @@ describe("Rick and Morty Character Gallery", () => {
     cy.contains("Rick Sanchez").should("not.exist");
 
     // Test invalid page number
-    cy.visit("http://localhost:3000/information/?page=-1");
+    cy.visit(`${baseUrl}?page=-1`);
     cy.url().should("include", "page=1");
-    cy.visit("http://localhost:3000/information/?page=1.5");
+    cy.visit(`${baseUrl}?page=1.5`);
     cy.url().should("include", "page=1");
-    cy.visit("http://localhost:3000/information/?page=notNumber");
+    cy.visit(`${baseUrl}?page=notNumber`);
     cy.url().should("include", "page=1");
   });
 
@@ -142,5 +143,26 @@ describe("Rick and Morty Character Gallery", () => {
     cy.contains(
       "We're sorry, but there was an error retrieving the character information.",
     ).should("be.visible");
+  });
+
+  it("should allow user to log out", () => {
+    login();
+
+    cy.contains(userName).should("exist");
+    cy.contains(jobTitle).should("exist");
+
+    cy.get("button").contains("Log Out").click();
+
+    // Verify user is redirected to login page
+    cy.url().should("eq", `${baseUrl}?page=1`);
+    cy.get('[role="dialog"]').should("be.visible");
+    cy.get('[role="dialog"]')
+      .contains("Enter User Information")
+      .should("exist");
+
+    // Verify user information is cleared
+    cy.contains(userName).should("not.exist");
+    cy.contains(jobTitle).should("not.exist");
+    cy.contains("Rick Sanchez").should("not.exist");
   });
 });
