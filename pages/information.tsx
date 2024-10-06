@@ -59,7 +59,6 @@ const InformationPage = () => {
 
 export default InformationPage;
 
-// TODO: cypress tests
 // TODO: Readme file
 // TODO: accessibility,
 // TODO: add a bit more code comments
