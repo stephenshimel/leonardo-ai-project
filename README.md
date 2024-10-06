@@ -49,7 +49,7 @@ This extensive testing strategy helps maintain code reliability and facilitates 
 
 Here's a demonstration of our Cypress E2E tests in action:
 
-![Cypress Demo](cypressDemo.gif)
+![Cypress Demo](./assets/cypressDemo.gif)
 
 
 
