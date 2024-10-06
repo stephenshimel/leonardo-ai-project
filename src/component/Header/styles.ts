@@ -23,20 +23,22 @@ export const logoTextStyles: TextProps = {
 export const userInfoContainerStyles: FlexProps = {
   alignItems: "center",
   width: { base: "100%", md: "auto" },
-  justifyContent: { base: "space-between", md: "flex-end" },
+  justifyContent: { base: "space-between", md: "flex-start" },
 };
 
 export const userInfoBoxStyles: BoxProps = {
-  textAlign: { base: "left", md: "right" },
+  textAlign: "left",
   mr: { base: 0, md: 4 },
 };
 
 export const usernameStyles: TextProps = {
   fontSize: "md",
+  fontWeight: "normal",
 };
 
 export const jobTitleStyles: TextProps = {
-  fontSize: "sm",
+  fontSize: "md",
+  fontWeight: "normal",
 };
 
 export const labelStyles: TextProps = {
@@ -48,6 +50,8 @@ export const labelStyles: TextProps = {
 export const valueStyles: TextProps = {
   as: "span",
   fontStyle: "italic",
+  fontSize: "md",
+  fontWeight: "normal",
 };
 
 export const changeUserButtonStyles: ButtonProps = {

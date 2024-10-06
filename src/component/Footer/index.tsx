@@ -2,9 +2,10 @@ import { Box, Button } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { footerContainerStyles, buttonStyles } from "./styles";
+import { isValidPageNumber, redirectToPage } from "@/src/util/util";
 
 interface FooterProps {
-  page: number;
+  page?: number;
   setPage: (newPage: number) => void;
 }
 
@@ -19,9 +20,18 @@ export const Footer = ({ page, setPage }: FooterProps) => {
 
   // allow user to change page by editing url
   useEffect(() => {
-    const pageFromUrl = Number(router.query.page) || 1;
-    setPage(pageFromUrl);
-  }, [router.query.page]);
+    if (!router.isReady) return;
+
+    const pageFromUrl = Number(router.query.page);
+    const validPage = isValidPageNumber(pageFromUrl) ? pageFromUrl : 1;
+
+    if (validPage !== page) {
+      redirectToPage(router, validPage);
+      setPage(validPage);
+    }
+  }, [router, setPage, page]);
+
+  if (!page) return null;
 
   return (
     <Box {...footerContainerStyles}>

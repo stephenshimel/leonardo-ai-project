@@ -1,40 +1,75 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Rick and Morty Character Gallery
 
-## Getting Started
+This is a Next.js application that displays a gallery of characters from the Rick and Morty TV show. Users can log in to access the pages of characters, view each character's original place by clicking on the card.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- Character grid display with pagination
+- User authentication
+- Responsive design
+- Error handling for API failures
+
+
+
+
+### Installation
+
+1. Use the correct Node.js version:
+   ```
+   nvm use
+   ```
+   This will use the Node.js version specified in the `.nvmrc` file.
+
+2. Install dependencies:
+   ```
+   yarn install
+   ```
+
+3. Run the application locally:
+   ```
+   yarn dev
+   ```
+
+
+4. Open your browser and navigate to `http://localhost:3000` to view the application.
+
+## Deployment
+
+This application is deployed on Vercel. You can access the live version at:
+
+https://leonardo-ai-project-nihlhmx67-stephenshimels-projects.vercel.app/information
+
+## Usage
+
+1. When you first visit the site, you'll be prompted to log in.
+2. Enter your username and job title.
+3. After logging in, you'll see a grid of Rick and Morty characters.
+4. Use the "Previous" and "Next" buttons at the bottom of the page to navigate through different pages of characters.
+5. Click on a character card to view more details about their origin.
+6. You can change user information by clicking the "Change User" button in the header.
+
+## Testing
+
+
+## Testing
+
+Before running any tests, always ensure you're using the correct Node.js version by:
+
+```
+nvm use
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Run unit tests by:
+```
+yarn test
+```
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+Run cypress E2E tests by
+```
+yarn cypress
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.

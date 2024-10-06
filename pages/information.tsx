@@ -1,9 +1,9 @@
 import { useDisclosure } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import LoginModal from "@/src/component/modal/LoginModal";
-import { CharacterGrid } from "@/src/component/InformationPage/CharacterGrid";
 import { Footer } from "@/src/component/Footer";
 import { Header, UserInfo } from "@/src/component/Header";
+import LoginModal from "@/src/component/modal/LoginModal";
+import { CharacterGrid } from "@/src/component/InformationPage/CharacterGrid";
 
 const InformationPage = () => {
   const {
@@ -12,7 +12,7 @@ const InformationPage = () => {
     onClose: closeLoginModal,
   } = useDisclosure();
 
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState<number>();
   const [userInfo, setUserInfo] = useState<UserInfo | undefined>(undefined);
   const [isInitialLoad, setIsInitialLoad] = useState(true);
 
@@ -30,7 +30,7 @@ const InformationPage = () => {
     if (userInfo) {
       localStorage.setItem("userInfo", JSON.stringify(userInfo));
     } else {
-      openLoginModal(); // when user is not logged in, always show login modal to block the access to the info page
+      openLoginModal(); // when user is not logged in, always show login modal in order to block the access to the info page
     }
   }, [userInfo, isInitialLoad, openLoginModal, closeLoginModal]);
 
@@ -59,8 +59,6 @@ const InformationPage = () => {
 
 export default InformationPage;
 
-// TODO: unit tests
-// TODO: cypress tests
 // TODO: Readme file
 // TODO: accessibility,
 // TODO: add a bit more code comments

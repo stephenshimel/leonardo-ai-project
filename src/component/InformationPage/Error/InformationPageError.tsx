@@ -10,7 +10,7 @@ const InformationPageError: React.FC<InformationPageErrorProps> = ({
   error,
 }) => {
   return (
-    <Box {...containerStyles}>
+    <Box {...containerStyles} data-testid="information-page-error">
       <Text {...titleStyles}>Error fetching data</Text>
       <Text {...messageStyles}>
         We're sorry, but there was an error retrieving the character

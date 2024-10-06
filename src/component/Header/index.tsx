@@ -28,7 +28,7 @@ export const Header = ({ userInfo, onChangeUser }: HeaderProps) => {
   return (
     <Flex {...headerContainerStyles}>
       <Box {...logoContainerStyles}>
-        <Text {...logoTextStyles}>Character Gallery</Text>
+        <Text {...logoTextStyles}>Rick and Morty Gallery</Text>
       </Box>
 
       <Flex {...userInfoContainerStyles}>

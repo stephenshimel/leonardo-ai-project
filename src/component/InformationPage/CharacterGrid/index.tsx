@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Grid, useDisclosure } from "@chakra-ui/react";
 import { useQuery } from "@apollo/client";
 
@@ -10,17 +10,18 @@ import type {
 } from "@/src/apollo/types/types";
 import InformationPageError from "../Error/InformationPageError";
 import InformationPageSkeleton from "../../Loading/InformationPageSkeleton";
-import { CharacterCard } from "../CharacterCard";
+import { CharacterCard } from "./CharacterCard";
 import { containerStyles, gridStyles } from "./styles";
 import { UserInfo } from "@/src/component/Header";
+import { isValidPageNumber } from "@/src/util/util";
 
 interface CharacterGridProps {
-  page: number;
-  userInfo?: UserInfo;
+  page?: number;
+  userInfo?: UserInfo; //TODO: just pass hasLoggedIn
 }
 
 export const CharacterGrid: React.FC<CharacterGridProps> = ({
-  page,
+  page = NaN,
   userInfo,
 }) => {
   const [selectedItem, setSelectedItem] = useState<number | undefined>();
@@ -43,7 +44,7 @@ export const CharacterGrid: React.FC<CharacterGridProps> = ({
   >(GET_CHARACTERS, {
     // TODO: make numbers of cards on each page take full width on last row
     variables: { name: characterName, page },
-    skip: userInfo === undefined,
+    skip: userInfo === undefined || !isValidPageNumber(page),
   });
 
   if (loading) return <InformationPageSkeleton />;
