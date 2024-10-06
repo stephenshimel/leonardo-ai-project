@@ -16,11 +16,14 @@ import { UserInfo } from "@/src/component/Header";
 import { isValidPageNumber } from "@/src/util/util";
 
 interface CharacterGridProps {
-  page: number;
+  page?: number;
   userInfo?: UserInfo; //TODO: just pass hasLoggedIn
 }
 
-export const CharacterGrid: React.FC<CharacterGridProps> = ({ page, userInfo }) => {
+export const CharacterGrid: React.FC<CharacterGridProps> = ({
+  page = NaN,
+  userInfo,
+}) => {
   const [selectedItem, setSelectedItem] = useState<number | undefined>();
   const [characterName] = useState("rick");
 
