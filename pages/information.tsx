@@ -11,7 +11,11 @@ import type {
   GetCharacters,
   GetCharactersQueryVariables,
 } from "@/src/apollo/types/types";
-import { isValidPageNumber } from "@/src/util/util";
+import {
+  getUserInfoFromLocalStorage,
+  isValidPageNumber,
+  setUserInfoInLocalStorage,
+} from "@/src/util/util";
 
 const InformationPage = () => {
   const {
@@ -35,8 +39,7 @@ const InformationPage = () => {
 
   // get user info from local storage
   useEffect(() => {
-    const storedUserInfo = localStorage.getItem("userInfo");
-    setUserInfo(storedUserInfo ? JSON.parse(storedUserInfo) : undefined);
+    setUserInfo(getUserInfoFromLocalStorage());
     setIsInitialLoad(false);
   }, []);
 
@@ -45,7 +48,7 @@ const InformationPage = () => {
     if (isInitialLoad) return;
 
     if (userInfo) {
-      localStorage.setItem("userInfo", JSON.stringify(userInfo));
+      setUserInfoInLocalStorage(userInfo);
     } else {
       openLoginModal(); // when user is not logged in, always show login modal in order to block the user from accessing the other pages
     }
