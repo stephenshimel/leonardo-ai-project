@@ -87,9 +87,7 @@ describe("Footer", () => {
   });
 
   it("doesn't render anything when page is undefined", () => {
-    const { container } = render(
-      <Footer page={undefined} setPage={mockSetPage} />,
-    );
+    const { container } = render(<Footer setPage={mockSetPage} />);
     expect(container.firstChild).toBeNull();
   });
 

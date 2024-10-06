@@ -1,30 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useCallback } from "react";
 import { Box, Grid, useDisclosure } from "@chakra-ui/react";
-import { useQuery } from "@apollo/client";
 
 import { ImageDetailsModal } from "../../modal/ImageDetailsModal";
-import { GET_CHARACTERS } from "@/src/apollo/query/getCharacters";
-import type {
-  GetCharacters,
-  GetCharactersQueryVariables,
-} from "@/src/apollo/types/types";
-import InformationPageError from "../Error/InformationPageError";
+import type { Character } from "@/src/apollo/types/types";
 import InformationPageSkeleton from "../../Loading/InformationPageSkeleton";
 import { CharacterCard } from "./CharacterCard";
 import { containerStyles, gridStyles } from "./styles";
-import { isValidPageNumber } from "@/src/util/util";
-import { UserInfo } from "../../types";
+import { InformationPageError } from "../Error/InformationPageError";
+
 interface CharacterGridProps {
-  page?: number;
-  hasUserInfo: boolean;
+  characters: Character[];
+  isLoading: boolean;
+  isError: boolean;
 }
 
 export const CharacterGrid: React.FC<CharacterGridProps> = ({
-  page = NaN,
-  hasUserInfo,
+  characters,
+  isLoading,
+  isError,
 }) => {
   const [selectedItem, setSelectedItem] = useState<number | undefined>();
-  const [characterName] = useState("rick");
 
   const {
     isOpen: isImageDetailsModalOpen,
@@ -32,23 +27,17 @@ export const CharacterGrid: React.FC<CharacterGridProps> = ({
     onClose: closeImageDetailsModal,
   } = useDisclosure();
 
-  const handleClickItem = (item: number) => {
-    setSelectedItem(item);
-    openImageDetailsModal();
-  };
+  const handleClickItem = useCallback(
+    (item: number) => {
+      setSelectedItem(item);
+      openImageDetailsModal();
+    },
+    [openImageDetailsModal, setSelectedItem],
+  );
 
-  const { data, loading, error } = useQuery<
-    GetCharacters,
-    GetCharactersQueryVariables
-  >(GET_CHARACTERS, {
-    variables: { name: characterName, page },
-    skip: !hasUserInfo || !isValidPageNumber(page),
-  });
+  if (isLoading) return <InformationPageSkeleton />;
 
-  if (loading) return <InformationPageSkeleton />;
-  if (error) return <InformationPageError error={error} />;
-
-  const characters = data?.characters.results || [];
+  if (isError) return <InformationPageError />;
 
   return (
     <>
@@ -56,7 +45,7 @@ export const CharacterGrid: React.FC<CharacterGridProps> = ({
         <Grid {...gridStyles} aria-label="Grid of Rick and Morty characters">
           {characters.map((character, index) => (
             <CharacterCard
-              key={index}
+              key={character.id}
               name={character.name}
               image={character.image}
               onClick={() => handleClickItem(index)}

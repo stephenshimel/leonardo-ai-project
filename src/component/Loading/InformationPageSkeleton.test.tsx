@@ -4,21 +4,16 @@ import "@testing-library/jest-dom";
 import InformationPageSkeleton from "./InformationPageSkeleton";
 
 describe("InformationPageSkeleton", () => {
-  it("renders the correct number of skeleton cards", () => {
+  it("renders the correct number of skeleton cards, images, and text", () => {
     render(<InformationPageSkeleton />);
+
     const skeletonCards = screen.getAllByRole("article");
-    expect(skeletonCards).toHaveLength(18);
-  });
+    expect(skeletonCards).toHaveLength(20);
 
-  it("renders skeleton images", () => {
-    render(<InformationPageSkeleton />);
     const skeletonImages = screen.getAllByTestId("skeleton-image");
-    expect(skeletonImages).toHaveLength(18);
-  });
+    expect(skeletonImages).toHaveLength(20);
 
-  it("renders skeleton text", () => {
-    render(<InformationPageSkeleton />);
     const skeletonTexts = screen.getAllByTestId("skeleton-text");
-    expect(skeletonTexts).toHaveLength(18);
+    expect(skeletonTexts).toHaveLength(20);
   });
 });
