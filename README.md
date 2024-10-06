@@ -47,7 +47,7 @@ This extensive testing strategy helps maintain code reliability and facilitates 
 
 ## Cypress Demo
 
-Here's a demonstration of our Cypress E2E tests in action:
+Here's a demonstration of Cypress E2E tests in action:
 
 ![Cypress Demo](./assets/cypressDemo.gif)
 
