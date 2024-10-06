@@ -41,17 +41,24 @@ export const usernameStyles: TextProps = {
   fontSize: "md",
   fontWeight: "normal",
   mb: 2,
+  whiteSpace: "nowrap",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
 };
 
 export const jobTitleStyles: TextProps = {
   fontSize: "md",
   fontWeight: "normal",
+  whiteSpace: "nowrap",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
 };
 
 export const labelStyles: TextProps = {
   as: "span",
   fontWeight: "bold",
   color: "yellow.300",
+  marginRight: "0.5rem",
 };
 
 export const valueStyles: TextProps = {
