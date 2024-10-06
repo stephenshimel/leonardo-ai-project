@@ -27,7 +27,9 @@ export const Footer = ({ page, setPage, totalPages }: FooterProps) => {
     if (!router.isReady) return;
 
     const pageFromUrl = Number(router.query.page);
-    const validPage = isValidPageNumber(pageFromUrl) ? pageFromUrl : 1;
+    const validPage = isValidPageNumber(pageFromUrl, totalPages)
+      ? pageFromUrl
+      : 1;
 
     if (validPage !== page) {
       redirectToPage(router, validPage);
