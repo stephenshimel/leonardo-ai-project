@@ -19,11 +19,7 @@ describe("LoginModal", () => {
 
   it("renders the modal with user information form when open", () => {
     render(
-      <LoginModal
-        isOpen={true}
-        onClose={mockOnClose}
-        setUserInfo={mockSetUserInfo}
-      />,
+      <LoginModal isOpen onClose={mockOnClose} setUserInfo={mockSetUserInfo} />,
     );
 
     expect(screen.getByText("Enter User Information")).toBeInTheDocument();
@@ -37,7 +33,7 @@ describe("LoginModal", () => {
   it("calls onClose when close button is clicked", () => {
     render(
       <LoginModal
-        isOpen={true}
+        isOpen
         onClose={mockOnClose}
         setUserInfo={mockSetUserInfo}
         userInfo={defaultUserInfo}
@@ -52,11 +48,7 @@ describe("LoginModal", () => {
 
   it("calls setUserInfo with username and jobTitle when form is submitted", async () => {
     render(
-      <LoginModal
-        isOpen={true}
-        onClose={mockOnClose}
-        setUserInfo={mockSetUserInfo}
-      />,
+      <LoginModal isOpen onClose={mockOnClose} setUserInfo={mockSetUserInfo} />,
     );
 
     const usernameInput = screen.getByLabelText("Username");
@@ -80,11 +72,7 @@ describe("LoginModal", () => {
 
   it("displays error messages when form is submitted with invalid data", async () => {
     render(
-      <LoginModal
-        isOpen={true}
-        onClose={mockOnClose}
-        setUserInfo={mockSetUserInfo}
-      />,
+      <LoginModal isOpen onClose={mockOnClose} setUserInfo={mockSetUserInfo} />,
     );
 
     const saveButton = screen.getByRole("button", {

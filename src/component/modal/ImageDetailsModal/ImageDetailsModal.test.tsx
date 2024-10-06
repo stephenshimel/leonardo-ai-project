@@ -20,7 +20,7 @@ describe("ImageDetailsModal", () => {
   it("renders the modal with character details when open", () => {
     render(
       <ImageDetailsModal
-        isOpen={true}
+        isOpen
         onClose={mockOnClose}
         character={mockCharacter}
       />,
@@ -34,7 +34,7 @@ describe("ImageDetailsModal", () => {
   it("calls onClose when close button is clicked", () => {
     render(
       <ImageDetailsModal
-        isOpen={true}
+        isOpen
         onClose={mockOnClose}
         character={mockCharacter}
       />,

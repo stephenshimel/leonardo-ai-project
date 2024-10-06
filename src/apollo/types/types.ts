@@ -13,7 +13,7 @@ export type Character = {
 export type GetCharacters = {
   characters: {
     info: {
-      count: number;
+      pages: number;
     };
     results: Array<Character>;
   };

@@ -46,36 +46,42 @@ describe("CharacterGrid", () => {
   it("renders loading state", () => {
     render(
       <MockedProvider mocks={mocks} addTypename={false}>
-        <CharacterGrid page={1} hasUserInfo />
+        <CharacterGrid page={1} characters={[]} isLoading isError={false} />
       </MockedProvider>,
     );
     expect(screen.getByTestId("skeleton-container")).toBeInTheDocument();
   });
 
-  it("renders characters when data is loaded", async () => {
+  it("renders characters when data is loaded", () => {
     render(
       <MockedProvider mocks={mocks} addTypename={false}>
-        <CharacterGrid page={1} hasUserInfo />
+        <CharacterGrid
+          page={1}
+          characters={mockCharacters}
+          isLoading={false}
+          isError={false}
+        />
       </MockedProvider>,
     );
 
-    await waitFor(() => {
-      expect(screen.getByText("Rick Sanchez")).toBeInTheDocument();
-      expect(screen.getByText("Morty Smith")).toBeInTheDocument();
-    });
+    expect(screen.getByText("Rick Sanchez")).toBeInTheDocument();
+    expect(screen.getByText("Morty Smith")).toBeInTheDocument();
   });
 
-  it("opens ImageDetailsModal when a character is clicked", async () => {
+  it("opens ImageDetailsModal when a character is clicked", () => {
     render(
       <MockedProvider mocks={mocks} addTypename={false}>
-        <CharacterGrid page={1} hasUserInfo />
+        <CharacterGrid
+          page={1}
+          characters={mockCharacters}
+          isLoading={false}
+          isError={false}
+        />
       </MockedProvider>,
     );
 
-    await waitFor(() => {
-      const rickCard = screen.getByText("Rick Sanchez");
-      fireEvent.click(rickCard);
-    });
+    const rickCard = screen.getByText("Rick Sanchez");
+    fireEvent.click(rickCard);
 
     expect(screen.getByRole("dialog")).toBeInTheDocument();
     expect(
@@ -83,51 +89,13 @@ describe("CharacterGrid", () => {
     ).toBeInTheDocument();
   });
 
-  it("doesn't render when userInfo is undefined", () => {
+  it("renders error state when isError prop is true", () => {
     render(
       <MockedProvider mocks={mocks} addTypename={false}>
-        <CharacterGrid page={1} hasUserInfo={false} />
+        <CharacterGrid page={1} characters={[]} isLoading={false} isError />
       </MockedProvider>,
     );
 
-    expect(
-      screen.queryByTestId("information-page-skeleton"),
-    ).not.toBeInTheDocument();
-    expect(screen.queryByText("Rick Sanchez")).not.toBeInTheDocument();
-  });
-
-  it("doesn't render when page number is invalid", () => {
-    render(
-      <MockedProvider mocks={mocks} addTypename={false}>
-        <CharacterGrid page={0} hasUserInfo />
-      </MockedProvider>,
-    );
-
-    expect(
-      screen.queryByTestId("information-page-skeleton"),
-    ).not.toBeInTheDocument();
-    expect(screen.queryByText("Rick Sanchez")).not.toBeInTheDocument();
-  });
-
-  it("renders error state when query fails", async () => {
-    const errorMock = [
-      {
-        request: {
-          query: GET_CHARACTERS,
-          variables: { name: "rick", page: 1 },
-        },
-        error: new Error("An error occurred"),
-      },
-    ];
-
-    render(
-      <MockedProvider mocks={errorMock} addTypename={false}>
-        <CharacterGrid page={1} hasUserInfo />
-      </MockedProvider>,
-    );
-
-    await waitFor(() => {
-      expect(screen.getByTestId("information-page-error")).toBeInTheDocument();
-    });
+    expect(screen.getByTestId("information-page-error")).toBeInTheDocument();
   });
 });
