@@ -35,21 +35,31 @@ describe("Footer", () => {
   it("renders the footer buttons", () => {
     render(<Footer page={1} setPage={mockSetPage} />);
     expect(
-      screen.getByRole("button", { name: "Previous" }),
+      screen.getByRole("button", { name: "Go to previous page" }),
     ).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Next" })).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "Go to next page" }),
+    ).toBeInTheDocument();
   });
 
   it("disables the Previous button on the first page", () => {
     render(<Footer page={1} setPage={mockSetPage} />);
-    expect(screen.getByRole("button", { name: "Previous" })).toBeDisabled();
-    expect(screen.getByRole("button", { name: "Next" })).not.toBeDisabled();
+    expect(
+      screen.getByRole("button", { name: "Go to previous page" }),
+    ).toBeDisabled();
+    expect(
+      screen.getByRole("button", { name: "Go to next page" }),
+    ).not.toBeDisabled();
   });
 
   it("enables the Previous button after the first page", () => {
     render(<Footer page={2} setPage={mockSetPage} />);
-    expect(screen.getByRole("button", { name: "Previous" })).not.toBeDisabled();
-    expect(screen.getByRole("button", { name: "Next" })).not.toBeDisabled();
+    expect(
+      screen.getByRole("button", { name: "Go to previous page" }),
+    ).not.toBeDisabled();
+    expect(
+      screen.getByRole("button", { name: "Go to next page" }),
+    ).not.toBeDisabled();
   });
 
   it("calls handlePageChange with correct value when Previous button is clicked", () => {

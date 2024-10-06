@@ -16,8 +16,8 @@ import {
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect } from "react";
-import { UserInfo } from "../../Header";
 import { schema } from "@/src/validation/schema";
+import { UserInfo } from "../../types";
 import {
   modalContentStyles,
   formControlStyles,
@@ -79,7 +79,7 @@ const LoginModal = ({
       <ModalOverlay backdropFilter="blur(50px)" />
       <ModalContent {...modalContentStyles}>
         <ModalHeader>Enter User Information</ModalHeader>
-        {userInfo && <ModalCloseButton />}
+        {userInfo && <ModalCloseButton aria-label="Close modal" />}
         <ModalBody>
           <form onSubmit={handleSubmit(handleFormSubmit)}>
             <FormControl {...formControlStyles} isInvalid={!!errors.username}>
@@ -87,6 +87,7 @@ const LoginModal = ({
               <Input
                 {...register("username")}
                 placeholder="Enter your username"
+                aria-label="Username input"
               />
               {errors.username && (
                 <FormErrorMessage>{errors.username.message}</FormErrorMessage>
@@ -98,6 +99,7 @@ const LoginModal = ({
               <Input
                 {...register("jobTitle")}
                 placeholder="Enter your job title"
+                aria-label="Job title input"
               />
               {errors.jobTitle && (
                 <FormErrorMessage>{errors.jobTitle.message}</FormErrorMessage>
@@ -109,6 +111,7 @@ const LoginModal = ({
               type="submit"
               width="full"
               {...submitButtonStyles}
+              aria-label="Save user information"
             >
               Save
             </Button>

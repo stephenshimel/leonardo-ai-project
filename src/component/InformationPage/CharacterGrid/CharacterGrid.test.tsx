@@ -46,10 +46,7 @@ describe("CharacterGrid", () => {
   it("renders loading state", () => {
     render(
       <MockedProvider mocks={mocks} addTypename={false}>
-        <CharacterGrid
-          page={1}
-          userInfo={{ username: "test", jobTitle: "tester" }}
-        />
+        <CharacterGrid page={1} hasUserInfo />
       </MockedProvider>,
     );
     expect(screen.getByTestId("skeleton-container")).toBeInTheDocument();
@@ -58,10 +55,7 @@ describe("CharacterGrid", () => {
   it("renders characters when data is loaded", async () => {
     render(
       <MockedProvider mocks={mocks} addTypename={false}>
-        <CharacterGrid
-          page={1}
-          userInfo={{ username: "test", jobTitle: "tester" }}
-        />
+        <CharacterGrid page={1} hasUserInfo />
       </MockedProvider>,
     );
 
@@ -74,10 +68,7 @@ describe("CharacterGrid", () => {
   it("opens ImageDetailsModal when a character is clicked", async () => {
     render(
       <MockedProvider mocks={mocks} addTypename={false}>
-        <CharacterGrid
-          page={1}
-          userInfo={{ username: "test", jobTitle: "tester" }}
-        />
+        <CharacterGrid page={1} hasUserInfo />
       </MockedProvider>,
     );
 
@@ -95,7 +86,7 @@ describe("CharacterGrid", () => {
   it("doesn't render when userInfo is undefined", () => {
     render(
       <MockedProvider mocks={mocks} addTypename={false}>
-        <CharacterGrid page={1} />
+        <CharacterGrid page={1} hasUserInfo={false} />
       </MockedProvider>,
     );
 
@@ -108,10 +99,7 @@ describe("CharacterGrid", () => {
   it("doesn't render when page number is invalid", () => {
     render(
       <MockedProvider mocks={mocks} addTypename={false}>
-        <CharacterGrid
-          page={0}
-          userInfo={{ username: "test", jobTitle: "tester" }}
-        />
+        <CharacterGrid page={0} hasUserInfo />
       </MockedProvider>,
     );
 
@@ -134,10 +122,7 @@ describe("CharacterGrid", () => {
 
     render(
       <MockedProvider mocks={errorMock} addTypename={false}>
-        <CharacterGrid
-          page={1}
-          userInfo={{ username: "test", jobTitle: "tester" }}
-        />
+        <CharacterGrid page={1} hasUserInfo />
       </MockedProvider>,
     );
 

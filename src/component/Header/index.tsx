@@ -12,12 +12,7 @@ import {
   valueStyles,
   changeUserButtonStyles,
 } from "./styles";
-
-// TODO: move types to separate file
-export type UserInfo = {
-  username: string;
-  jobTitle: string;
-};
+import { UserInfo } from "../types";
 
 type HeaderProps = {
   userInfo?: UserInfo;
@@ -26,26 +21,36 @@ type HeaderProps = {
 
 export const Header = ({ userInfo, onChangeUser }: HeaderProps) => {
   return (
-    <Flex {...headerContainerStyles}>
+    <Flex {...headerContainerStyles} as="header" aria-label="Page header">
       <Box {...logoContainerStyles}>
-        <Text {...logoTextStyles}>Rick and Morty Gallery</Text>
+        <Text {...logoTextStyles} aria-label="Website title">
+          Rick and Morty Gallery
+        </Text>
       </Box>
 
       <Flex {...userInfoContainerStyles}>
         {userInfo && (
-          <Box {...userInfoBoxStyles}>
+          <Box {...userInfoBoxStyles} aria-label="User information">
             <Text {...usernameStyles}>
               <Text {...labelStyles}>Username:</Text>{" "}
-              <Text {...valueStyles}>{userInfo.username}</Text>
+              <Text {...valueStyles} aria-label="Username">
+                {userInfo.username}
+              </Text>
             </Text>
             <Text {...jobTitleStyles}>
               <Text {...labelStyles}>Job Title:</Text>{" "}
-              <Text {...valueStyles}>{userInfo.jobTitle}</Text>
+              <Text {...valueStyles} aria-label="Job title">
+                {userInfo.jobTitle}
+              </Text>
             </Text>
           </Box>
         )}
 
-        <Button {...changeUserButtonStyles} onClick={onChangeUser}>
+        <Button
+          {...changeUserButtonStyles}
+          onClick={onChangeUser}
+          aria-label="Change user information"
+        >
           Change User
         </Button>
       </Flex>

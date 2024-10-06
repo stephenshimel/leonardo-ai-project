@@ -34,14 +34,19 @@ export const Footer = ({ page, setPage }: FooterProps) => {
   if (!page) return null;
 
   return (
-    <Box {...footerContainerStyles}>
+    <Box {...footerContainerStyles} aria-label="Pagination">
       <Button
         onClick={() => handlePageChange(page - 1)}
         isDisabled={page === 1}
+        aria-label="Go to previous page"
       >
         Previous
       </Button>
-      <Button onClick={() => handlePageChange(page + 1)} {...buttonStyles}>
+      <Button
+        onClick={() => handlePageChange(page + 1)}
+        {...buttonStyles}
+        aria-label="Go to next page"
+      >
         Next
       </Button>
     </Box>
