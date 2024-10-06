@@ -24,16 +24,23 @@ export const userInfoContainerStyles: FlexProps = {
   alignItems: "center",
   width: { base: "100%", md: "auto" },
   justifyContent: { base: "space-between", md: "flex-start" },
+  flexDirection: { base: "column", md: "row" },
 };
 
 export const userInfoBoxStyles: BoxProps = {
   textAlign: "left",
   mr: { base: 0, md: 4 },
+  mb: { base: "1rem", md: 0 },
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "flex-start",
+  width: "100%",
 };
 
 export const usernameStyles: TextProps = {
   fontSize: "md",
   fontWeight: "normal",
+  mb: 2,
 };
 
 export const jobTitleStyles: TextProps = {
@@ -54,6 +61,12 @@ export const valueStyles: TextProps = {
   fontWeight: "normal",
 };
 
+export const buttonContainerStyles: FlexProps = {
+  width: "100%",
+  justifyContent: "space-between",
+  flexDirection: "row",
+};
+
 export const changeUserButtonStyles: ButtonProps = {
   colorScheme: "yellow",
   variant: "outline",
@@ -63,4 +76,12 @@ export const changeUserButtonStyles: ButtonProps = {
     bg: "yellow.500",
     color: "teal.800",
   },
+  flex: 1,
+  mr: 2,
+};
+
+export const logoutButtonStyles: ButtonProps = {
+  ...changeUserButtonStyles,
+  mr: 0,
+  ml: 2,
 };

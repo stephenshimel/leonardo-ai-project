@@ -1,5 +1,5 @@
 import { Flex, Box, Text, Button } from "@chakra-ui/react";
-import React from "react";
+import React, { useCallback } from "react";
 import {
   headerContainerStyles,
   logoContainerStyles,
@@ -11,8 +11,11 @@ import {
   labelStyles,
   valueStyles,
   changeUserButtonStyles,
+  buttonContainerStyles,
 } from "./styles";
 import { UserInfo } from "../types";
+import { useRouter } from "next/router";
+import { removeUserInfoFromLocalStorage, logOut } from "@/src/util/util";
 
 type HeaderProps = {
   userInfo?: UserInfo;
@@ -20,6 +23,12 @@ type HeaderProps = {
 };
 
 export const Header = ({ userInfo, onChangeUser }: HeaderProps) => {
+  const router = useRouter();
+
+  const handleLogout = useCallback(() => {
+    logOut(router);
+  }, [router]);
+
   return (
     <Flex {...headerContainerStyles} as="header" aria-label="Page header">
       <Box {...logoContainerStyles}>
@@ -46,13 +55,22 @@ export const Header = ({ userInfo, onChangeUser }: HeaderProps) => {
           </Box>
         )}
 
-        <Button
-          {...changeUserButtonStyles}
-          onClick={onChangeUser}
-          aria-label="Change user information"
-        >
-          Change User
-        </Button>
+        <Flex {...buttonContainerStyles}>
+          <Button
+            {...changeUserButtonStyles}
+            onClick={onChangeUser}
+            aria-label="Change user information"
+          >
+            Change User
+          </Button>
+          <Button
+            {...changeUserButtonStyles}
+            onClick={handleLogout}
+            aria-label="Log out"
+          >
+            Log Out
+          </Button>
+        </Flex>
       </Flex>
     </Flex>
   );
