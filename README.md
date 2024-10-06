@@ -32,8 +32,6 @@ This project follows a modular and component-based architecture. The main applic
 
 Utility functions are stored in `src/util`. The project uses GraphQL for data fetching, with Apollo Client as the GraphQL client. Styling is managed using Chakra UI, providing a consistent and responsive design throughout the application.
 
-The codebase is written in TypeScript, ensuring type safety and improved developer experience.
-
 ## Testing Coverage
 
 Testing is a crucial aspect of this project, ensuring robust code quality and functionality. We have implemented comprehensive test coverage:
@@ -57,7 +55,7 @@ Here's a demonstration of Cypress E2E tests in action:
 
 This application is deployed on Vercel. You can access the live version at:
 
-https://leonardo-ai-project-nihlhmx67-stephenshimels-projects.vercel.app
+https://leonardo-ai-project-git-main-stephenshimels-projects.vercel.app
 
 ## Usage
 
