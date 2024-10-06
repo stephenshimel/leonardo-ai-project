@@ -46,7 +46,7 @@ describe("CharacterGrid", () => {
   it("renders loading state", () => {
     render(
       <MockedProvider mocks={mocks} addTypename={false}>
-        <CharacterGrid page={1} characters={[]} isLoading isError={false} />
+        <CharacterGrid characters={[]} isLoading isError={false} />
       </MockedProvider>,
     );
     expect(screen.getByTestId("skeleton-container")).toBeInTheDocument();
@@ -56,7 +56,6 @@ describe("CharacterGrid", () => {
     render(
       <MockedProvider mocks={mocks} addTypename={false}>
         <CharacterGrid
-          page={1}
           characters={mockCharacters}
           isLoading={false}
           isError={false}
@@ -72,7 +71,6 @@ describe("CharacterGrid", () => {
     render(
       <MockedProvider mocks={mocks} addTypename={false}>
         <CharacterGrid
-          page={1}
           characters={mockCharacters}
           isLoading={false}
           isError={false}
@@ -92,7 +90,7 @@ describe("CharacterGrid", () => {
   it("renders error state when isError prop is true", () => {
     render(
       <MockedProvider mocks={mocks} addTypename={false}>
-        <CharacterGrid page={1} characters={[]} isLoading={false} isError />
+        <CharacterGrid characters={[]} isLoading={false} isError />
       </MockedProvider>,
     );
 
