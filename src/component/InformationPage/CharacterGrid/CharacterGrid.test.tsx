@@ -10,19 +10,19 @@ const mockCharacters = [
     id: "1",
     name: "Rick Sanchez",
     image: "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
-    status: "Alive",
-    species: "Human",
-    type: "",
-    gender: "Male",
+    location: {
+      id: "20",
+      name: "Earth (Replacement Dimension)",
+    },
   },
   {
     id: "2",
     name: "Morty Smith",
     image: "https://rickandmortyapi.com/api/character/avatar/2.jpeg",
-    status: "Alive",
-    species: "Human",
-    type: "",
-    gender: "Male",
+    location: {
+      id: "20",
+      name: "Earth (Replacement Dimension)",
+    },
   },
 ];
 
@@ -87,7 +87,9 @@ describe("CharacterGrid", () => {
     });
 
     expect(screen.getByRole("dialog")).toBeInTheDocument();
-    expect(screen.getByText("Rick Sanchez")).toBeInTheDocument();
+    expect(
+      screen.getByText("Earth (Replacement Dimension)"),
+    ).toBeInTheDocument();
   });
 
   it("doesn't render when userInfo is undefined", () => {

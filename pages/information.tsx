@@ -43,7 +43,7 @@ const InformationPage = () => {
         }}
       ></Header>
 
-      <CharacterGrid page={page} userInfo={userInfo} />
+      <CharacterGrid page={page ?? NaN} userInfo={userInfo} />
 
       <Footer page={page} setPage={setPage} />
 
