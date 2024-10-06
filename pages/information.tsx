@@ -27,13 +27,14 @@ const InformationPage = () => {
   const [page, setPage] = useState<number>(NaN);
   const [userInfo, setUserInfo] = useState<UserInfo | undefined>(undefined);
   const [isInitialLoad, setIsInitialLoad] = useState(true);
+  const characterName = "Rick";
 
   // loading and error UI are handled in CharacterGrid
   const { data, loading, error } = useQuery<
     GetCharacters,
     GetCharactersQueryVariables
   >(GET_CHARACTERS, {
-    variables: { name: "rick", page: page },
+    variables: { name: characterName, page: page },
     skip: !userInfo || !isValidPageNumber(page),
   });
 

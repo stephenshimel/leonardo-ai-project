@@ -33,7 +33,7 @@ describe("Footer", () => {
   });
 
   it("renders the footer buttons", () => {
-    render(<Footer page={1} setPage={mockSetPage} />);
+    render(<Footer page={1} setPage={mockSetPage} totalPages={10} />);
     expect(
       screen.getByRole("button", { name: "Go to previous page" }),
     ).toBeInTheDocument();
@@ -43,7 +43,7 @@ describe("Footer", () => {
   });
 
   it("disables the Previous button on the first page", () => {
-    render(<Footer page={1} setPage={mockSetPage} />);
+    render(<Footer page={1} setPage={mockSetPage} totalPages={10} />);
     expect(
       screen.getByRole("button", { name: "Go to previous page" }),
     ).toBeDisabled();
@@ -53,7 +53,7 @@ describe("Footer", () => {
   });
 
   it("enables the Previous button after the first page", () => {
-    render(<Footer page={2} setPage={mockSetPage} />);
+    render(<Footer page={2} setPage={mockSetPage} totalPages={10} />);
     expect(
       screen.getByRole("button", { name: "Go to previous page" }),
     ).not.toBeDisabled();
@@ -64,7 +64,7 @@ describe("Footer", () => {
 
   it("calls handlePageChange with correct value when Previous button is clicked", () => {
     (util.isValidPageNumber as jest.Mock).mockReturnValue(true);
-    render(<Footer page={2} setPage={mockSetPage} />);
+    render(<Footer page={2} setPage={mockSetPage} totalPages={10} />);
 
     fireEvent.click(screen.getByText("Previous"));
 
@@ -76,7 +76,7 @@ describe("Footer", () => {
 
   it("calls handlePageChange with correct value when Next button is clicked", () => {
     (util.isValidPageNumber as jest.Mock).mockReturnValue(true);
-    render(<Footer page={2} setPage={mockSetPage} />);
+    render(<Footer page={2} setPage={mockSetPage} totalPages={10} />);
 
     fireEvent.click(screen.getByText("Next"));
 
@@ -87,7 +87,9 @@ describe("Footer", () => {
   });
 
   it("doesn't render anything when page is undefined", () => {
-    const { container } = render(<Footer setPage={mockSetPage} />);
+    const { container } = render(
+      <Footer setPage={mockSetPage} totalPages={10} />,
+    );
     expect(container.firstChild).toBeNull();
   });
 
@@ -95,7 +97,7 @@ describe("Footer", () => {
     mockRouter.query = { page: "3" };
 
     act(() => {
-      render(<Footer page={2} setPage={mockSetPage} />);
+      render(<Footer page={2} setPage={mockSetPage} totalPages={10} />);
     });
 
     expect(mockSetPage).toHaveBeenCalledWith(3);
@@ -106,7 +108,7 @@ describe("Footer", () => {
     (util.isValidPageNumber as jest.Mock).mockReturnValue(false);
 
     act(() => {
-      render(<Footer page={2} setPage={mockSetPage} />);
+      render(<Footer page={2} setPage={mockSetPage} totalPages={10} />);
     });
 
     expect(util.redirectToPage).toHaveBeenCalledWith(mockRouter, 1);
