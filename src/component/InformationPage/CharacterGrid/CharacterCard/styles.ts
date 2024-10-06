@@ -5,10 +5,10 @@ export const cardStyles: BoxProps = {
   borderRadius: "lg",
   overflow: "hidden",
   cursor: "pointer",
-  maxWidth: "200px", // Set a maximum width for the card
-  maxHeight: "300px", // Set a maximum height for the card
-  width: "100%", // Allow the card to be responsive
-  height: "100%", // Allow the card to be responsive
+  maxWidth: "200px",
+  maxHeight: "300px",
+  width: "100%",
+  height: "100%",
 };
 
 export const imageContainerStyles: BoxProps = {
