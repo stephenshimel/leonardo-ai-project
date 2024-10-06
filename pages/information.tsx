@@ -1,7 +1,8 @@
 import { useDisclosure } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { Footer } from "@/src/component/Footer";
-import { Header, UserInfo } from "@/src/component/Header";
+import { Header } from "@/src/component/Header";
+import { UserInfo } from "@/src/component/types";
 import LoginModal from "@/src/component/modal/LoginModal";
 import { CharacterGrid } from "@/src/component/InformationPage/CharacterGrid";
 
@@ -43,7 +44,7 @@ const InformationPage = () => {
         }}
       ></Header>
 
-      <CharacterGrid page={page} userInfo={userInfo} />
+      <CharacterGrid page={page} hasUserInfo={!!userInfo} />
 
       <Footer page={page} setPage={setPage} />
 
@@ -58,6 +59,3 @@ const InformationPage = () => {
 };
 
 export default InformationPage;
-
-// TODO: accessibility,
-// TODO: add a bit more code comments

@@ -12,12 +12,7 @@ import {
   valueStyles,
   changeUserButtonStyles,
 } from "./styles";
-
-// TODO: move types to separate file
-export type UserInfo = {
-  username: string;
-  jobTitle: string;
-};
+import { UserInfo } from "../types";
 
 type HeaderProps = {
   userInfo?: UserInfo;

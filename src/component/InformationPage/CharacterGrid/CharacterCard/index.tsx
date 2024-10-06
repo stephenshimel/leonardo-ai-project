@@ -19,7 +19,6 @@ export const CharacterCard: React.FC<CharacterCardProps> = ({
   image,
   onClick,
 }) => {
-  // TODO: loading status on card level
   return (
     <Box
       {...cardStyles}
