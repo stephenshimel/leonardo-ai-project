@@ -2,7 +2,7 @@
 
 This is a Next.js application that displays a gallery of characters from the Rick and Morty TV show. Users can log in to access the pages of characters, view each character's original place by clicking on the card.
 
-### Running the app locally
+## Running the app locally
 
 1. Install the correct Node.js version specified in the `.nvmrc` file
    ```
