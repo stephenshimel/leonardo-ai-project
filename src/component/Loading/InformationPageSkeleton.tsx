@@ -13,7 +13,7 @@ const InformationPageSkeleton: React.FC = () => {
   return (
     <Box {...containerStyles} data-testid="skeleton-container">
       <Grid {...gridStyles} data-testid="skeleton-grid">
-        {[...Array(18)].map((_, index) => (
+        {[...Array(20)].map((_, index) => (
           <Box key={index} {...cardStyles} role="article">
             <Skeleton {...imageSkeletonStyles} data-testid="skeleton-image" />
             <Box {...textSkeletonContainerStyles}>

@@ -47,7 +47,6 @@ export const CharacterGrid: React.FC<CharacterGridProps> = ({
     variables: { name: characterName, page },
     skip: !hasUserInfo || !isValidPageNumber(page),
   });
-
   if (loading) return <InformationPageSkeleton />;
 
   if (error) return <InformationPageError />;
