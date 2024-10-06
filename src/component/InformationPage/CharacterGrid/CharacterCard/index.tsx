@@ -21,14 +21,24 @@ export const CharacterCard: React.FC<CharacterCardProps> = ({
 }) => {
   // TODO: loading status on card level
   return (
-    <Box {...cardStyles} onClick={onClick}>
+    <Box
+      {...cardStyles}
+      onClick={onClick}
+      aria-label={`Character card for ${name}`}
+    >
       <Box {...imageContainerStyles}>
-        <Image src={image} alt={name} {...imageStyles} />
+        <Image
+          src={image}
+          alt={name}
+          {...imageStyles}
+          aria-label={`Image of ${name}`}
+        />
       </Box>
       <Box {...textContainerStyles}>
-        <Text {...textStyles}>{name}</Text>
+        <Text {...textStyles} aria-label={`Name: ${name}`}>
+          {name}
+        </Text>
       </Box>
     </Box>
   );
 };
-

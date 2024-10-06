@@ -29,7 +29,9 @@ describe("LoginModal", () => {
     expect(screen.getByText("Enter User Information")).toBeInTheDocument();
     expect(screen.getByLabelText("Username")).toBeInTheDocument();
     expect(screen.getByLabelText("Job Title")).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Save" })).toBeInTheDocument();
+    const saveButton = screen.getByRole("button", {
+      name: "Save user information",
+    });
   });
 
   it("calls onClose when close button is clicked", () => {
@@ -42,7 +44,7 @@ describe("LoginModal", () => {
       />,
     );
 
-    const closeButton = screen.getByRole("button", { name: /close/i });
+    const closeButton = screen.getByRole("button", { name: "Close modal" });
     fireEvent.click(closeButton);
 
     expect(mockOnClose).toHaveBeenCalledTimes(1);
@@ -59,7 +61,9 @@ describe("LoginModal", () => {
 
     const usernameInput = screen.getByLabelText("Username");
     const jobTitleInput = screen.getByLabelText("Job Title");
-    const saveButton = screen.getByRole("button", { name: "Save" });
+    const saveButton = screen.getByRole("button", {
+      name: "Save user information",
+    });
 
     fireEvent.change(usernameInput, { target: { value: "newuser" } });
     fireEvent.change(jobTitleInput, { target: { value: "Designer" } });
@@ -83,7 +87,9 @@ describe("LoginModal", () => {
       />,
     );
 
-    const saveButton = screen.getByRole("button", { name: "Save" });
+    const saveButton = screen.getByRole("button", {
+      name: "Save user information",
+    });
     fireEvent.click(saveButton);
 
     await waitFor(() => {

@@ -54,14 +54,15 @@ export const CharacterGrid: React.FC<CharacterGridProps> = ({
 
   return (
     <>
-      <Box {...containerStyles}>
-        <Grid {...gridStyles}>
+      <Box {...containerStyles} aria-label="Character grid container">
+        <Grid {...gridStyles} aria-label="Grid of Rick and Morty characters">
           {characters.map((character, index) => (
             <CharacterCard
               key={index}
               name={character.name}
               image={character.image}
               onClick={() => handleClickItem(index)}
+              aria-label={`Character card for ${character.name}`}
             />
           ))}
         </Grid>
@@ -72,6 +73,7 @@ export const CharacterGrid: React.FC<CharacterGridProps> = ({
           isOpen={isImageDetailsModalOpen}
           onClose={closeImageDetailsModal}
           character={characters[selectedItem]}
+          aria-label={`Details for ${characters[selectedItem]?.name}`}
         />
       )}
     </>
