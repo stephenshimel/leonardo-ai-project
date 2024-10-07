@@ -28,7 +28,7 @@ This is a Next.js application that displays a gallery of characters from the Ric
 
 ## Project Structure
 
-This project follows a modular and component-based architecture. The main application logic is located in the `pages` directory, with the primary page being `information.tsx`. Components are organized in the `src/component` directory, separated by functionality (e.g., Header, Footer, CharacterGrid).
+This project follows a modular and component-based architecture. The primary page is `information.tsx` under `page` folder. Components are organized in the `src/component` directory, separated by functionality (e.g., Header, Footer, CharacterGrid).
 
 Utility functions are stored in `src/util`. The project uses GraphQL for data fetching, with Apollo Client as the GraphQL client. Styling is managed using Chakra UI, providing a consistent and responsive design throughout the application.
 
