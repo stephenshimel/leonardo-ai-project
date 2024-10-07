@@ -53,7 +53,7 @@ const InformationPage = () => {
     } else {
       openLoginModal(); // when user is not logged in, always show login modal in order to block the user from accessing the other pages
     }
-  }, [userInfo, isInitialLoad, openLoginModal, closeLoginModal]);
+  }, [userInfo, isInitialLoad, openLoginModal]);
 
   const handleChangeUser = useCallback(() => {
     openLoginModal();

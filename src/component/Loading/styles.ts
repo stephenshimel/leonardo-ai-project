@@ -17,11 +17,16 @@ export const cardStyles: BoxProps = {
   borderWidth: "1px",
   borderRadius: "lg",
   overflow: "hidden",
-  height: "300px",
+  maxWidth: "200px",
+  maxHeight: "300px",
+  width: "100%",
+  height: "100%",
 };
 
 export const imageSkeletonStyles: BoxProps = {
-  height: "200px",
+  width: "100%",
+  paddingBottom: "100%",
+  position: "relative",
 };
 
 export const textSkeletonContainerStyles: BoxProps = {

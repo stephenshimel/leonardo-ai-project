@@ -55,6 +55,7 @@ export const CharacterGrid: React.FC<CharacterGridProps> = ({
         </Grid>
       </Box>
 
+      {/* Using strict equality (!==) to handle the case when selectedItem is 0 */}
       {selectedItem !== undefined && (
         <ImageDetailsModal
           isOpen={isImageDetailsModalOpen}
