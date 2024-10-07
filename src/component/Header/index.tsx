@@ -15,7 +15,7 @@ import {
 } from "./styles";
 import { UserInfo } from "../types";
 import { useRouter } from "next/router";
-import { removeUserInfoFromLocalStorage, logOut } from "@/src/util/util";
+import { logOut } from "@/src/util/util";
 
 type HeaderProps = {
   userInfo?: UserInfo;

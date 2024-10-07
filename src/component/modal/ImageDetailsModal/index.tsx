@@ -16,7 +16,7 @@ import { modalContentStyles, imageStyles, vStackStyles } from "./styles";
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
-  character?: Character; // Allow null if no character is selected
+  character?: Character;
 }
 
 export const ImageDetailsModal = ({
@@ -24,7 +24,7 @@ export const ImageDetailsModal = ({
   onClose,
   character,
 }: ModalProps) => {
-  if (!character) return null; // If no character is selected, don't render anything
+  if (!character) return null;
 
   return (
     <Modal

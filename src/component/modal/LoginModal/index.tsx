@@ -64,7 +64,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
 
   const handleClose = useCallback(() => {
     // when userInfo is undefined, user is not allowed to manually close the modal
-    if (userInfo !== undefined) {
+    if (userInfo) {
       reset(userInfo);
       onClose();
     }
