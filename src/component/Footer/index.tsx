@@ -50,9 +50,11 @@ export const Footer = ({ page, setPage, totalPages }: FooterProps) => {
           Previous
         </Button>
 
-        <Text>
-          Page {page} of {totalPages}
-        </Text>
+        {totalPages > 0 && (
+          <Text>
+            Page {page} of {totalPages}
+          </Text>
+        )}
 
         <Button
           onClick={() => handlePageChange(page + 1)}
