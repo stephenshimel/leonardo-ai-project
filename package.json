@@ -6,10 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
     "test": "jest --watchAll",
-    "cypress": "cypress open",
-    "cypress:run": "cypress run"
+    "cypress": "cypress open"
   },
   "dependencies": {
     "@apollo/client": "^3.11.8",
